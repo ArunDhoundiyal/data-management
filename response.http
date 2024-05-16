@@ -1,0 +1,27 @@
+GET http://localhost:4000/products/?&search=&category=ALL&price=NORMAL&page_no=1
+###
+
+DELETE http://localhost:4000/products/timewear/
+### 
+
+POST http://localhost:4000/products/ 
+Content-Type: application/json
+
+{
+    "name":"BlackBerry",
+    "price":"20000",
+    "category":"Mobiles", 
+    "description": "BlackBerry comes with good camera quality and battery backup"
+}
+
+###
+
+PUT http://localhost:4000/products/sonata
+Content-Type: application/json
+
+{
+    "name":"TimeWear",
+    "price":"250",
+    "category":"Watches", 
+    "description": "Time-wear comes in crisp and casual style with analog dial" 
+}
