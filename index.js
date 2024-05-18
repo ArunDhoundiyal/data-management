@@ -12,8 +12,8 @@ const initialize_DataBase_and_Server = async () => {
       filename: dbPath,
       driver: sqlite3.Database,
     });
-    server_instance.listen(4000, () => {
-      console.log("sever is running on http://localhost:4000");
+    server_instance.listen(3001, () => {
+      console.log("sever is running on http://localhost:3001");
     });
   } catch (error) {
     console.log(`DataBase Error ${error.message}`);
@@ -32,8 +32,19 @@ server_instance.get("/products/", async (request, response) => {
       ? limit * (parseInt(page_no) - 1)
       : 0;
   const sortPrice = price === "ASC" || price === "DESC" ? price : "NORMAL";
-  const titleCase =
-    category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+
+  let titleCase;
+  if (category.indexOf("-") !== -1) {
+    titleCase =
+      category[0] +
+      category.slice(1, category.indexOf("-")).toLowerCase() +
+      category[category.indexOf("-")] +
+      (category[category.indexOf("-") + 1] +
+        category.slice(category.indexOf("-") + 2).toLowerCase());
+  } else {
+    titleCase =
+      category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  }
 
   try {
     let queryProductDetails;
